@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
@@ -13,7 +12,7 @@ class MyBag extends StatefulWidget {
 class _MyBagState extends State<MyBag> {
   List<Map<String, dynamic>> productData = [
     {
-      'image': '',
+      'image': 'assets/images/t_one.jpg',
       'name': "Pullover",
       'color': 'black',
       'size': 'L',
@@ -21,7 +20,7 @@ class _MyBagState extends State<MyBag> {
       'quantity': 1
     },
     {
-      'image': '',
+      'image': 'assets/images/t-two.jpg',
       'name': "T-Shirt",
       'color': 'Gray',
       'size': 'L',
@@ -29,7 +28,7 @@ class _MyBagState extends State<MyBag> {
       'quantity': 1
     },
     {
-      'image': '',
+      'image': 'assets/images/t-three.jpg',
       'name': "Sport Dress",
       'color': 'black',
       'size': 'M',
@@ -90,7 +89,13 @@ class _MyBagState extends State<MyBag> {
                         child: Row(
                           children: <Widget>[
                             Container(
-                              child: Text('image'),
+                              width: 10.w,
+                              height: 10.h,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          productData[index]['image']),
+                                      fit: BoxFit.contain)),
                             ),
                             SizedBox(
                               width: 5.w,
@@ -214,7 +219,7 @@ class _MyBagState extends State<MyBag> {
                           'Total amount',
                           style: TextStyle(color: Colors.grey),
                         ),
-                        Text('${totalPrice}')
+                        Text('${totalPrice}\$')
                       ],
                     ),
                     SizedBox(
@@ -226,15 +231,51 @@ class _MyBagState extends State<MyBag> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('total product - ${totalQuantity}'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Close'),
+                                content: Container(
+                                  height: 50.h,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Congratulations!',
+                                        style: TextStyle(
+                                            fontSize: 5.w,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Text(
+                                        'You have added ${totalQuantity} items on your bag!',
+                                        style: TextStyle(
+                                            fontSize: 5.w,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Container(
+                                          width: 90.w,
+                                          height: 5.h,
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  255, 255, 145, 0),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Center(
+                                            child: Text('OKAY'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ],
+                                ),
                               );
                             });
                       },
